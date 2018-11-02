@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/contact', 'PagesController@contact')->name('contact'); // I didn't want to have users log in to contact.
+Route::post('/contact', 'PagesController@store')->name('contact.store');
