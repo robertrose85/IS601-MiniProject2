@@ -44,4 +44,15 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users',
             ['name'=>'Steve Smith']);
     }
+
+    public function testExample2()
+    {
+        $user = User::inRandomOrder()->first();
+
+        echo $user; // for testing purposes
+
+        $user->delete();
+
+        $this->assertDatabaseMissing('users', [$user]);
+    }
 }
