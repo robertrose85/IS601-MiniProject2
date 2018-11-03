@@ -22,7 +22,7 @@ class CarTest extends TestCase
         $makeKeys = array_rand($makeArray); // returns array KEY
         $modelArray = array("Model1", "Model2", "Model3", "Model4");
         $modelKeys = array_rand($modelArray);
-        $yearInt = rand(2001,2019);
+        $yearInt = mt_rand(2001,2019);
 
         $user = factory(\App\car::class)->create([
             'Make' => $makeArray[$makeKeys],
@@ -64,4 +64,24 @@ class CarTest extends TestCase
 
         $this->assertDatabaseMissing('cars', [$car]);
     }
+    public function testCarCount()
+    {
+        $count = car::all();
+
+        $cars = $count->count();
+
+        echo "There are" . ' ' . $cars . ' ' . "cars in the database."; // testing purposes
+
+        $this->assertTrue($cars >= 50);
+
+    }
+
+    /**
+    public function testYearInt()
+    {
+        $car = car::inRandomOrder()->first();
+        // this asserts that the car year is an integer - if true, test passes.
+        $this->assertInternalType('int',$car->Year);
+    }
+     * **/
 }
