@@ -16,6 +16,15 @@ class CarTest extends TestCase
      * @return void
      */
 
+    //Kept getting undefined variable when I tried to  pass this into a function. Please advise for knowledge.
+    /**
+    private $makeArray = array("Toyota", "Ford", "Honda"); //creates array
+    private $makeKeys = array_rand($makeArray); // returns array KEY
+    private $modelArray = array("Model1", "Model2", "Model3", "Model4");
+    private $modelKeys = array_rand($modelArray);
+    private $yearInt = mt_rand(2001,2019);
+     * **/
+
     public function testCarInsert()
     {
         $makeArray = array("Toyota", "Ford", "Honda"); //creates array
@@ -42,11 +51,11 @@ class CarTest extends TestCase
     {
 
         $car = car::inRandomOrder()->first(); //car::where('Year' <> '2000')->first();
-        echo $car;
+        //echo $car;
 
         $car->Year = '2000';
 
-        echo $car;
+        //echo $car;
         $car->save();
 
         $this->assertDatabaseHas('cars',[
@@ -70,7 +79,7 @@ class CarTest extends TestCase
 
         $cars = $count->count();
 
-        echo "There are" . ' ' . $cars . ' ' . "cars in the database."; // testing purposes
+        //echo "There are" . ' ' . $cars . ' ' . "cars in the database."; // testing purposes
 
         $this->assertTrue($cars >= 50);
 
@@ -81,5 +90,14 @@ class CarTest extends TestCase
         $car = car::inRandomOrder()->first();
         // this asserts that the car year is an integer - if true, test passes.
         $this->assertInternalType('int',$car->Year);
+    }
+
+    public function testMake()
+    {
+        $makeArray = array("Toyota", "Ford", "Honda"); //creates array
+
+        $car = car::inRandomOrder()->first();
+        // this asserts that the car year is an integer - if true, test passes.
+        $this->assertTrue(in_array($car->Make,$makeArray));
     }
 }
