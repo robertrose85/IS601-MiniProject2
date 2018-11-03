@@ -54,4 +54,14 @@ class CarTest extends TestCase
             ]
         );
     }
+    public function testCarDelete()
+    {
+        $car = car::inRandomOrder()->first();
+
+        //echo $car; // for testing purposes
+
+        $car->delete();
+
+        $this->assertDatabaseMissing('cars', [$car]);
+    }
 }
