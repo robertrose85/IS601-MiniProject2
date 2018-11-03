@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class car extends Model
 {
-    //
+    protected $casts = [
+        'Year' => 'integer'
+    ];
 }

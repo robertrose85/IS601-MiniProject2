@@ -76,12 +76,10 @@ class CarTest extends TestCase
 
     }
 
-    /**
     public function testYearInt()
     {
         $car = car::inRandomOrder()->first();
         // this asserts that the car year is an integer - if true, test passes.
         $this->assertInternalType('int',$car->Year);
     }
-     * **/
 }

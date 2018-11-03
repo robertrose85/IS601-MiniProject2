@@ -15,7 +15,7 @@ $factory->define(App\car::class, function (Faker $faker) {
 
         'Make' => $makeArray[$makeKeys], // inputs array key into array variable - resulting in random VALUE
         'Model' => $modelArray[$modelKeys],
-        'Year' => rand(2001,2019),
+        'Year' =>mt_rand(2001,2019),
     ];
 
 });
