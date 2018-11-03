@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -10,6 +10,7 @@ use App\User;
 
 class UserTest extends TestCase
 {
+    //use RefreshDatabase;
     /**
      * A basic test example.
      *
@@ -17,23 +18,30 @@ class UserTest extends TestCase
      */
     public function testExample()
     {
-        /**$user = new user;
-
-        $user->name = 'Bob';
-        $user->email = 'rr637@njit.edu';
-        $user->password = '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm';
-        $user->remember_token = str_random(10);**/
+        $name = rand(1,10000);
+        $password = rand(10001,20000);
 
         $user = factory(\App\User::class)->create([
             'name' => 'Bob',
-            'email' => 'rr637@njit.edu',
+            'email' => $name . '@njit.edu',
             'email_verified_at' => now(),
-            'password' => 'password', // secret
+            'password' => (string)$password, // secret
             'remember_token' => str_random(10),]);
 
         $this->assertDatabaseHas(
             'users', [
             'name' => 'Bob',
-            'email'=>'rr637@njit.edu']);
+            'email'=>$name . '@njit.edu']);
+    }
+
+    public function testExample1()
+    {
+        $user = User::inRandomOrder()->first();
+
+        $user->name = 'Steve Smith';
+        $user->save();
+
+        $this->assertDatabaseHas('users',
+            ['name'=>'Steve Smith']);
     }
 }
