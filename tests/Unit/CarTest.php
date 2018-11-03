@@ -100,4 +100,11 @@ class CarTest extends TestCase
         // this asserts that the car year is an integer - if true, test passes.
         $this->assertTrue(in_array($car->Make,$makeArray));
     }
+
+    public function testModelStr()
+    {
+        $car = car::inRandomOrder()->first();
+        // this asserts that the car year is an integer - if true, test passes.
+        $this->assertInternalType('string',$car->Model);
+    }
 }
