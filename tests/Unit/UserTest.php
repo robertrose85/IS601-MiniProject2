@@ -34,7 +34,7 @@ class UserTest extends TestCase
             'email'=>$name . '@njit.edu']);
     }
 
-    public function testExample1()
+    public function testChange()
     {
         $user = User::inRandomOrder()->first();
 
@@ -45,14 +45,26 @@ class UserTest extends TestCase
             ['name'=>'Steve Smith']);
     }
 
-    public function testExample2()
+    public function testDelete()
     {
         $user = User::inRandomOrder()->first();
 
-        echo $user; // for testing purposes
+        //echo $user; // for testing purposes
 
         $user->delete();
 
         $this->assertDatabaseMissing('users', [$user]);
+    }
+
+    public function testCount()
+    {
+        $count = User::all();
+
+        $users = $count->count();
+
+        //echo "There are" . ' ' . $users . ' ' . "users in the database."; // testing purposes
+
+        $this->assertTrue($users >= 50);
+
     }
 }
